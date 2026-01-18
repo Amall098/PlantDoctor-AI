@@ -92,7 +92,7 @@ if uploaded_file is not None:
             with st.spinner(t['analyzing']):
                 try:
                     # Récupération de la clé API sauvegardée dans Render
-                    api_key = st.secrets["OPENAI_API_KEY"]
+                    api_key = os.environ.get("OPENAI_API_KEY")
                     base64_image = encode_image(uploaded_file)
 
                     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
