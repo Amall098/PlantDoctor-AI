@@ -104,17 +104,43 @@ if uploaded_file is not None:
                     base64_image = encode_image(uploaded_file)
 
                     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
-                    
-                    payload = {
-                        "model": "gpt-4o",
-                        "messages": [
-                            {"role": "user", "content": [
-                                {"type": "text", "text": t['prompt']},
-                                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"}}
-                            ]}
-                        ],
-                        "max_tokens": 300
+                        payload = {
+        "model": "gpt-4o",
+        "messages": [
+            {
+                "role": "system",
+                "content": """
+                Tu es un expert phytopathologiste et agronome spécialisé dans les cultures africaines. 
+                Ta mission est d'analyser les images de plantes pour identifier les maladies, ravageurs ou carences.
+                
+                RÈGLES STRICTES :
+                1. NE DIS JAMAIS "Je ne peux pas diagnostiquer". Donne toujours ton MEILLEUR avis d'expert.
+                2. Analyse les symptômes visibles (taches, jaunissement, flétrissement).
+                3. Structure ta réponse en 4 parties claires :
+                   - 🔍 Identification probable de la plante
+                   - ⚠️ Symptômes observés
+                   - 🦠 Diagnostic (Maladie / Ravageur / Carence / Stress hydrique)
+                   - 💊 Traitement recommandé (Remèdes naturels locaux et solutions chimiques)
+                4. Réponds toujours en FRANÇAIS.
+                """
+            },
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Analyse cette plante et donne-moi un diagnostic précis et des solutions."
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": f"data:image/jpeg;base64,{base64_image}"
+                        }
                     }
+                ]
+            }
+        ],
+        "max_tokens": 800}
 
                     response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
                     response.raise_for_status()
