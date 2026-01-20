@@ -15,20 +15,28 @@ with st.sidebar:
 
     st.markdown("---")
 
-    # 2. Votre Profil (Photo et Bio)
-    # Assurez-vous d'avoir un fichier 'profile.jpg' dans votre GitHub pour que cela fonctionne
+    # 2. Votre Profil
+    # On utilise votre lien direct GitHub pour garantir l'affichage
+    url_photo = "https://github.com/Amall098/PlantDoctor-AI/blob/main/profil.jpg?raw=true"
+    
+    # Affichage de l'image (avec gestion d'erreur au cas où)
     try:
-        st.image("profile.jpg", width=150) 
+        st.image(url_photo, width=150)
     except:
-        st.write("📷 (Ajoutez 'profile.jpg' sur GitHub pour voir votre photo)")
+        st.error("Erreur d'affichage photo")
 
     st.markdown("### Dr. Abakar Malloum")
     st.markdown("**Chercheur & Professeur**")
     st.caption("Université d'Ottawa & Université Saint-Paul")
     
     st.markdown("---")
-    st.markdown("📍 *Spécialiste en éthique du numérique et innovation.*")
-    st.markdown("📧 *Contactez-moi pour toute collaboration.*")
+    
+    if language == "Français":
+        st.markdown("📍 *Spécialiste en éthique du numérique et innovation.*")
+        st.markdown("📧 *Contactez-moi pour toute collaboration.*")
+    else:
+        st.markdown("📍 *Specialist in digital ethics and innovation.*")
+        st.markdown("📧 *Contact me for collaboration.*")
 
 # --- CONTENU PRINCIPAL ---
 
@@ -44,14 +52,18 @@ if language == "Français":
     
     # Prompt Système en Français
     system_prompt = """
-    Tu es un expert phytopathologiste et agronome. 
+    Tu es un expert phytopathologiste et agronome spécialisé dans les cultures africaines. 
     Ta mission est d'analyser les images pour identifier les maladies, ravageurs ou carences.
     RÈGLES :
-    1. Ne dis jamais "Je ne peux pas". Donne ton meilleur avis d'expert.
-    2. Structure ta réponse en 4 parties : Identification, Symptômes, Diagnostic, Traitement (Bio et Chimique).
+    1. Ne dis jamais "Je ne peux pas". Donne ton meilleur avis d'expert basé sur les symptômes visibles.
+    2. Structure ta réponse en 4 parties claires avec des titres en GRAS :
+       - 🔍 **Identification probable**
+       - ⚠️ **Symptômes observés**
+       - 🦠 **Diagnostic** (Maladie / Ravageur / Carence / Stress)
+       - 💊 **Traitement recommandé** (Solutions bio/locales et solutions chimiques)
     3. Réponds en FRANÇAIS.
     """
-    user_prompt = "Analyse cette plante, identifie la maladie et donne des remèdes."
+    user_prompt = "Analyse cette plante, identifie la maladie et donne des remèdes précis."
 
 else: # English
     title = "🌿 PlantDoctor AI"
@@ -64,14 +76,18 @@ else: # English
 
     # Prompt Système en Anglais
     system_prompt = """
-    You are an expert plant pathologist and agronomist.
+    You are an expert plant pathologist and agronomist specialized in African crops.
     Your mission is to analyze images to identify diseases, pests, or deficiencies.
     RULES:
-    1. Never say "I cannot diagnose". Give your best expert opinion.
-    2. Structure your answer in 4 parts: Identification, Symptoms, Diagnosis, Treatment (Organic and Chemical).
+    1. Never say "I cannot diagnose". Give your best expert opinion based on visual symptoms.
+    2. Structure your answer in 4 clear parts with BOLD titles:
+       - 🔍 **Probable Identification**
+       - ⚠️ **Observed Symptoms**
+       - 🦠 **Diagnosis** (Disease / Pest / Deficiency / Stress)
+       - 💊 **Recommended Treatment** (Organic/Local remedies and Chemical solutions)
     3. Answer in ENGLISH.
     """
-    user_prompt = "Analyze this plant, identify the disease, and provide remedies."
+    user_prompt = "Analyze this plant, identify the disease, and provide precise remedies."
 
 # Affichage du titre
 st.title(title)
@@ -132,7 +148,7 @@ if uploaded_file is not None:
                                 ]
                             }
                         ],
-                        "max_tokens": 800
+                        "max_tokens": 1000
                     }
 
                     response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
