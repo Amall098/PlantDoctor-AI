@@ -1,3 +1,11 @@
+# Configuration pour éviter les déconnexions intempestives
+import streamlit as st
+st.set_page_config(
+    page_title="PlantDoctor AI",
+    page_icon="🌿",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 import streamlit as st
 import numpy as np
 from PIL import Image
