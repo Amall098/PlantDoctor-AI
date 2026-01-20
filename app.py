@@ -16,31 +16,34 @@ with st.sidebar:
     st.markdown("---")
 
     # 2. Votre Profil
-    # On utilise votre lien direct GitHub pour garantir l'affichage
+    # Lien direct vers votre photo GitHub
     url_photo = "https://github.com/Amall098/PlantDoctor-AI/blob/main/profil.jpg?raw=true"
     
-    # Affichage de l'image (avec gestion d'erreur au cas où)
     try:
         st.image(url_photo, width=150)
     except:
-        st.error("Erreur d'affichage photo")
+        st.error("Image introuvable")
 
-    st.markdown("### Dr. Abakar Malloum")
-    st.markdown("**Chercheur & Professeur**")
-    st.caption("Université d'Ottawa & Université Saint-Paul")
+    # TITRE : Changé en "Prof." selon votre préférence
+    st.markdown("### Prof. Abakar Malloum")
     
-    st.markdown("---")
-    
+    # BIO DYNAMIQUE : Tout change selon la langue choisie
     if language == "Français":
+        st.markdown("**Chercheur & Professeur**")
+        st.caption("Université d'Ottawa & Université Saint-Paul")
+        st.markdown("---")
         st.markdown("📍 *Spécialiste en éthique du numérique et innovation.*")
         st.markdown("📧 *Contactez-moi pour toute collaboration.*")
-    else:
+    else: # English
+        st.markdown("**Researcher & Professor**")
+        st.caption("University of Ottawa & Saint Paul University")
+        st.markdown("---")
         st.markdown("📍 *Specialist in digital ethics and innovation.*")
         st.markdown("📧 *Contact me for collaboration.*")
 
 # --- CONTENU PRINCIPAL ---
 
-# Textes dynamiques selon la langue
+# Textes dynamiques pour l'interface principale
 if language == "Français":
     title = "🌿 PlantDoctor AI"
     subtitle = "Assistant intelligent pour le diagnostic des maladies des plantes"
