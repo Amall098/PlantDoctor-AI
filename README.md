@@ -232,7 +232,7 @@ Contributions are welcome: bug reports, datasets for additional crops, translati
 
 **Abakar Mall**
 PhD in political thought and public administration · Researcher and developer
-[GitHub](https://github.com/Amall098) · <!-- LinkedIn · email -->
+[GitHub](https://github.com/Amall098) · <!-- LinkedIn · email --> www.linkedin.com/in/abakar-malloum-phd-22a2264b  
 
 ### License
 
