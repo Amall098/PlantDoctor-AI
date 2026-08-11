@@ -14,9 +14,11 @@
 
 </div>
 
-<!-- Remplacez ce bloc par une capture d'écran ou un GIF de l'application en action.
-     Placez le fichier dans /assets et référencez-le ainsi : -->
-<!-- ![Aperçu de l'application](assets/demo.gif) -->
+<!-- L'application en action.
+     Placez le fichier dans /<img width="1525" height="802" alt="image" src="https://github.com/user-attachments/assets/51fa0202-beac-47fe-8509-fd9204276425" />
+
+<!-- ![Aperçu de l'application](assets/demo.gif) --><img width="1522" height="852" alt="image" src="https://github.com/user-attachments/assets/fe2c3403-e3b0-4054-a666-aa0a6647fca9" />
+
 
 ---
 
